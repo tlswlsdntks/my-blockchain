@@ -1,3 +1,4 @@
-go-etherum clone:
-    브랜치를 releases/1.10 으로 변경:
-        git clone "https://github.com/ethereum/go-ethereum/tree/release/1.10"
+geth 프로젝트 구조 확인:
+    프로젝트 가져오기:
+        git clone "https://github.com/ethereum/go-ethereum.git"
+        
