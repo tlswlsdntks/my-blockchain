@@ -91,7 +91,7 @@ geth 프로젝트 구조 확인:
                 return &Genesis{
                     Config: params.MainnetChainConfig,
                     Nonce:  66,
-                    ExtraData:  hexutil.MustDecode("3a784687a2b2ff9a2c72e22b001d33d9f2e2155a7858ff663b0990d35f14745d"),
+                    ExtraData:  hexutil.MustDecode("Keccak-256 해시 함수"),
                     GasLimit:   8000000,
                     Difficulty: big.NewInt(17179),
                     Alloc:      decodePrealloc(mainnetAllocData),
@@ -101,8 +101,8 @@ geth 프로젝트 구조 확인:
     메인넷 체인 구성:
         geth 코드 - MainnetChainConfig 변수 수정:
             go-ethereum\params\config.go, line: 60
-            MainnetChainConfig = &ChainConfig {
-                ChainID:                       big.NewInt(213912), // simple
+            MainnetChainConfig = &ChainConfig{
+                ChainID:                       big.NewInt(213972), // simple
                 HomesteadBlock:                big.NewInt(0),
                 DAOForkBlock:                  big.NewInt(0),
                 DAOForkSupport:                true,
@@ -211,3 +211,60 @@ geth 프로젝트 구조 확인:
 
 역대 이더리움 하드포크 살펴보기:
     https://ethereum.org/en/history/
+
+체인 하드포크 (1) 메인넷 컨피그에 하드포크 코드 추가:
+    geth 코드 - 블록체인 네트워크(메인넷) 구성 설정:
+        go-ethereum\params\config.go, line: 102
+        MainnetChainConfig = &ChainConfig{
+            SimpleBlock:                   big.NewInt(0),
+        }
+
+    geth 코드 - Ethash 프로토콜 변경 사항:
+        go-ethereum\params\config.go, line: 297
+        AllEthashProtocolChanges = &ChainConfig{big.NewInt(1337), big.NewInt(0), nil, false, big.NewInt(0), common.Hash{}, big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), nil, nil, nil, nil, false, new(EthashConfig), nil}
+    
+    geth 코드 - Clique 프로토콜 변경 사항:
+        go-ethereum\params\config.go, line: 304
+        AllCliqueProtocolChanges = &ChainConfig{big.NewInt(1337), big.NewInt(0), nil, false, big.NewInt(0), common.Hash{}, big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), nil, nil, nil, nil, nil, nil, false, nil, &CliqueConfig{Period: 0, Epoch: 30000}}
+
+    geth 코드 - 테스트 환경 변경 사항:
+        go-ethereum\params\config.go, line: 306 
+        TestChainConfig = &ChainConfig{big.NewInt(1), big.NewInt(0), nil, false, big.NewInt(0), common.Hash{}, big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), nil, nil, nil, nil, false, new(EthashConfig), nil}
+
+    geth 코드 - 하드포크와 업그레이드 시점 설정:
+        go-ethereum\params\config.go, line: 396
+        type ChainConfig struct {
+            SimpleBlock         *big.Int `json:"simpleBlock,omitempty"`
+        }
+
+    geth 코드 - 블록체인 네트워크(메인넷)의 구성 정보를 문자열로 출력하는 기능:
+        go-ethereum\params\config.go, line: 492
+        func (c *ChainConfig) String() string {
+            if c.SimpleBlock != nil {
+                banner += fmt.Sprintf(" - Simple:                %-8v (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/gray-glacier.md)\n", c.SimpleBlock)
+            }
+        }
+
+    geth 코드 - 포크된 상태인지 여부를 판단:
+        go-ethereum\params\config.go, line: 590
+        func (c *ChainConfig) IsSimple(num *big.Int) bool {
+            return isForked(c.SimpleBlock, num)
+        }
+
+    geth 코드 - 하드포크들이 올바른 순서로 활성화되었는지 확인:
+        go-ethereum\params\config.go, line: 632
+        func (c *ChainConfig) CheckConfigForkOrder() error {
+            for _, cur := range []fork{
+                {name: "simpleBlock", block: c.SimpleBlock},
+            }
+        }
+
+    geth 코드 - 블록 번호와 네트워크 상태에 따라 적절한 규칙을 동적으로 생성:
+        go-ethereum\params\config.go, line: 818
+        func (c *ChainConfig) Rules(num *big.Int, isMerge bool) Rules {
+            return Rules{
+                IsSimple:         c.IsSimple(num),
+            }
+        }
+
+    
