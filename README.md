@@ -290,3 +290,25 @@ geth 프로젝트 구조 확인:
                 }
             }
         }
+
+체인 하드포크 (3) 블록 생성 컨센서스 코드 추가:
+    geth 코드 - 상수 선언:
+        go-ethereum\consensus\ethash\consensus.go, line: 71
+        var (
+            big5          = big.NewInt(5)
+        )
+
+    geth 코드 - 이더리움의 난이도 계산 방식:
+        go-ethereum\consensus\ethash\consensus.go, line: 397
+        func makeDifficultyCalculator(bombDelay *big.Int) func(time uint64, parent *types.Header) *big.Int {
+            return func(time uint64, parent *types.Header) *big.Int {
+                x.Div(x, big5)
+            }
+        }
+
+        go-ethereum\consensus\ethash\difficulty.go, line: 148
+        func MakeDifficultyCalculatorU256(bombDelay *big.Int) func(time uint64, parent *types.Header) *big.Int {
+            return func(time uint64, parent *types.Header) *big.Int {
+                x := (time - parent.Time) / 5
+            }   
+        }
