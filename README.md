@@ -73,3 +73,7 @@ geth 프로젝트 구조 확인:
         go-wemix 프로젝트 가져오기:
             git clone "https://github.com/wemixarchive/go-wemix.git"
     
+제네시스 블록 코드 수정 (1) 코드 살펴보기:
+    geth 코드 - 제네시스 블록 확인:
+        go-ethereum\core\genesis.go
+    
