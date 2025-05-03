@@ -42,3 +42,25 @@ geth 프로젝트 구조 확인:
 
     클레이튼 스캐너 사이트:
         https://scope.klaytn.com
+
+다른 체인 살펴보기 (3) 폴리곤:
+    개요:
+        https://docs.polygon.technology/pos/architecture/overview/?h=arch#architectural-overview
+
+    polygon 프로젝트 구조 확인:
+        heimdal 프로젝트 가져오기:
+            git clone "https://github.com/maticnetwork/heimdall.git"
+        
+        bor 프로젝트 가져오기:
+            git clone "https://github.com/maticnetwork/bor.git"
+
+        초기 자산 할당 해시 확인:
+            bor\core\allocs\bor_mainnet.json
+
+    폴리곤 스캐너 사이트:
+        https://polygonscan.com/
+
+    Polygon Edge:
+        Polygon 생태계 내에서 맞춤형 블록체인 네트워크를 빠르게 만들고 관리하는 도구
+        Polygon Edge 프로젝트 가져오기:
+            git clone "https://github.com/0xPolygon/polygon-edge.git"
