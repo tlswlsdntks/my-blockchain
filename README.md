@@ -140,3 +140,19 @@ geth 프로젝트 구조 확인:
             // },
             // Threshold: 2,
         }
+
+제네시스 블록 코드 수정 (3) bip32 wallet 생성 실습:
+    BIP 32 (Bitcoin Improvement Proposal 32):
+        목적: HD(Hierarchical Deterministic) 지갑을 위한 표준
+        기능: 하나의 시드(비밀 문구 또는 키)로부터 여러 개의 계좌, 주소를 계층적으로 생성할 수 있게 해준다.
+        특징: 계층적 구조를 통해 주소와 키를 체계적으로 관리할 수 있어, 복구와 백업이 용이하다.
+    
+    BIP 39 (Bitcoin Improvement Proposal 39)
+        목적: 사용자 친화적인 시드 생성 표준
+        기능: 무작위로 생성된 숫자(엔트로피)를 니모닉 코드(인간이 읽기 쉬운 12개 또는 24개 단어)로 변환한다.
+        특징: 이 단어 목록을 통해 시드를 쉽게 기억하거나 백업할 수 있으며, 이를 다시 복원하여 지갑을 복구할 수 있다.
+    
+    ethereum-hdwallet 생성:
+        https://www.npmjs.com/package/ethereum-hdwallet
+        npm init -y
+        npm i -D bip39 ethereum-hdwallet
