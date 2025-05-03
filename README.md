@@ -174,26 +174,26 @@ geth 프로젝트 구조 확인:
         "gasLimit" : "0x0",
         "difficulty" : "0x0",
         "alloc" : {
-            "e4eae9a6f00a0f491b11c39f5f1d3290e235d3b1" : {"balance" : "1000000000000000000"},
-            "5cae8fc105b965159d5c6c58eec3354e32bf94a3" : {"balance" : "1000000000000000000"},
-            "1cc3ae70d0485f063ca4de0c5512823672576427" : {"balance" : "1000000000000000000"},
-            "afeb1e979cab33337a26f1e72620ba3991a2432c" : {"balance" : "1000000000000000000"},
-            "aa5008e9aa401993a32a08bca4ffc9b1071cd212" : {"balance" : "1000000000000000000"},
-            "673b445b80a70f971e1306fd6efdb83803c92bd5" : {"balance" : "1000000000000000000"},
-            "9cf22b063bfe425cbdf009e949c8cca53d708371" : {"balance" : "1000000000000000000"},
-            "5e592f6a984a39311ea39b881dd29d6aaf054f7a" : {"balance" : "1000000000000000000"},
-            "e44a336bcee12624f07b2434e2eef5da02c9a9b5" : {"balance" : "1000000000000000000"},
-            "02bd60af9f4450ded4eb590b84b5bbaf25d36bf8" : {"balance" : "1000000000000000000"},
-            "1882ec962a1720652429e26c57871ae8be63f175" : {"balance" : "1000000000000000000"},
-            "bff7a62149a3c6e76baa92f7b205a9214f0ff6ed" : {"balance" : "1000000000000000000"},
-            "d6aa835aef466b230aec7a79248f37a25068a9d2" : {"balance" : "1000000000000000000"},
-            "b541573b7afd4b4f9ba77a7cddf266071ae63732" : {"balance" : "1000000000000000000"},
-            "da6cebd93f3bca10770c376969255b02f5ff79aa" : {"balance" : "1000000000000000000"},
-            "12649604e9eeb96e9b1d766177329f4bda5cb0c8" : {"balance" : "1000000000000000000"},
-            "55685134409b823e0ee767f21bd494bfe98e03d0" : {"balance" : "1000000000000000000"},
-            "aa41835deacb73d007f1ccf249a85464c0a64a65" : {"balance" : "1000000000000000000"},
-            "47897598f63c98ba197b89838a4d6130a57eb40a" : {"balance" : "1000000000000000000"},
-            "a82241d5cf29695b8e9cc9b445db13bd1927e00d" : {"balance" : "1000000000000000000"}
+            "e4eae9a6f00a0f491b11c39f5f1d3290e235d3b1" : {"balance" : "10000000000000000000000000"},
+            "5cae8fc105b965159d5c6c58eec3354e32bf94a3" : {"balance" : "10000000000000000000000000"},
+            "1cc3ae70d0485f063ca4de0c5512823672576427" : {"balance" : "10000000000000000000000000"},
+            "afeb1e979cab33337a26f1e72620ba3991a2432c" : {"balance" : "10000000000000000000000000"},
+            "aa5008e9aa401993a32a08bca4ffc9b1071cd212" : {"balance" : "10000000000000000000000000"},
+            "673b445b80a70f971e1306fd6efdb83803c92bd5" : {"balance" : "10000000000000000000000000"},
+            "9cf22b063bfe425cbdf009e949c8cca53d708371" : {"balance" : "10000000000000000000000000"},
+            "5e592f6a984a39311ea39b881dd29d6aaf054f7a" : {"balance" : "10000000000000000000000000"},
+            "e44a336bcee12624f07b2434e2eef5da02c9a9b5" : {"balance" : "10000000000000000000000000"},
+            "02bd60af9f4450ded4eb590b84b5bbaf25d36bf8" : {"balance" : "10000000000000000000000000"},
+            "1882ec962a1720652429e26c57871ae8be63f175" : {"balance" : "10000000000000000000000000"},
+            "bff7a62149a3c6e76baa92f7b205a9214f0ff6ed" : {"balance" : "10000000000000000000000000"},
+            "d6aa835aef466b230aec7a79248f37a25068a9d2" : {"balance" : "10000000000000000000000000"},
+            "b541573b7afd4b4f9ba77a7cddf266071ae63732" : {"balance" : "10000000000000000000000000"},
+            "da6cebd93f3bca10770c376969255b02f5ff79aa" : {"balance" : "10000000000000000000000000"},
+            "12649604e9eeb96e9b1d766177329f4bda5cb0c8" : {"balance" : "10000000000000000000000000"},
+            "55685134409b823e0ee767f21bd494bfe98e03d0" : {"balance" : "10000000000000000000000000"},
+            "aa41835deacb73d007f1ccf249a85464c0a64a65" : {"balance" : "10000000000000000000000000"},
+            "47897598f63c98ba197b89838a4d6130a57eb40a" : {"balance" : "10000000000000000000000000"},
+            "a82241d5cf29695b8e9cc9b445db13bd1927e00d" : {"balance" : "10000000000000000000000000"}
         }
     }
 
@@ -202,12 +202,10 @@ geth 프로젝트 구조 확인:
         $ go run mkalloc.go genesis.json:
             $ cd core/
             $ go run mkalloc.go ../genesis.json
+        const allocData = "\xf9\x02\xa8\xe1\x94\x02\xbd`\xaf\x9fDP\xde\xd4\xebY\v\x84\xb5\xbb\xaf%\xd3k\xf8\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\x12d\x96\x04\xe9\xee\xb9n\x9b\x1dvaw2\x9fK\xda\\\xb0\u020b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\x18\x82\xec\x96*\x17 e$)\xe2lW\x87\x1a\xe8\xbec\xf1u\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\x1c\u00eep\xd0H_\x06<\xa4\xde\fU\x12\x826rWd'\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94G\x89u\x98\xf6<\x98\xba\x19{\x89\x83\x8aMa0\xa5~\xb4\n\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94UhQ4@\x9b\x82>\x0e\xe7g\xf2\x1b\u0514\xbf\xe9\x8e\x03\u040b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\\\xae\x8f\xc1\x05\xb9e\x15\x9d\\lX\xee\xc35N2\xbf\x94\xa3\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94^Y/j\x98J91\x1e\xa3\x9b\x88\x1d\u049dj\xaf\x05Oz\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94g;D[\x80\xa7\x0f\x97\x1e\x13\x06\xfdn\xfd\xb88\x03\xc9+\u054b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u151c\xf2+\x06;\xfeB\\\xbd\xf0\t\xe9I\xc8\u0325=p\x83q\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u1528\"A\xd5\xcf)i[\x8e\x9c\u0274E\xdb\x13\xbd\x19'\xe0\r\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u152aA\x83]\xea\xcbs\xd0\a\xf1\xcc\xf2I\xa8Td\xc0\xa6Je\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u152aP\b\xe9\xaa@\x19\x93\xa3*\b\xbc\xa4\xff\u0271\a\x1c\xd2\x12\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u152f\xeb\x1e\x97\x9c\xab33z&\xf1\xe7& \xba9\x91\xa2C,\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u1535AW;z\xfdKO\x9b\xa7z|\xdd\xf2f\a\x1a\xe672\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u153f\xf7\xa6!I\xa3\xc6\xe7k\xaa\x92\xf7\xb2\x05\xa9!O\x0f\xf6\xed\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\u05aa\x83Z\xefFk#\n\xeczy$\x8f7\xa2Ph\xa9\u048b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\xdal\xeb\xd9?;\xca\x10w\f7ii%[\x02\xf5\xffy\xaa\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\xe4J3k\xce\xe1&$\xf0{$4\xe2\xee\xf5\xda\x02\u0269\xb5\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\xe4\xea\xe9\xa6\xf0\n\x0fI\x1b\x11\u00df_\x1d2\x90\xe25\u04f1\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00"
 
-        const allocData = "\xf9\x02l\u0794\x02\xbd`\xaf\x9fDP\xde\xd4\xebY\v\x84\xb5\xbb\xaf%\xd3k\xf8\x88\r\u0db3\xa7d\x00\x00\u0794\x12d\x96\x04\xe9\xee\xb9n\x9b\x1dvaw2\x9fK\xda\\\xb0\u0208\r\u0db3\xa7d\x00\x00\u0794\x18\x82\xec\x96*\x17 e$)\xe2lW\x87\x1a\xe8\xbec\xf1u\x88\r\u0db3\xa7d\x00\x00\u0794\x1c\u00eep\xd0H_\x06<\xa4\xde\fU\x12\x826rWd'\x88\r\u0db3\xa7d\x00\x00\u0794G\x89u\x98\xf6<\x98\xba\x19{\x89\x83\x8aMa0\xa5~\xb4\n\x88\r\u0db3\xa7d\x00\x00\u0794UhQ4@\x9b\x82>\x0e\xe7g\xf2\x1b\u0514\xbf\xe9\x8e\x03\u0408\r\u0db3\xa7d\x00\x00\u0794\\\xae\x8f\xc1\x05\xb9e\x15\x9d\\lX\xee\xc35N2\xbf\x94\xa3\x88\r\u0db3\xa7d\x00\x00\u0794^Y/j\x98J91\x1e\xa3\x9b\x88\x1d\u049dj\xaf\x05Oz\x88\r\u0db3\xa7d\x00\x00\u0794g;D[\x80\xa7\x0f\x97\x1e\x13\x06\xfdn\xfd\xb88\x03\xc9+\u0548\r\u0db3\xa7d\x00\x00\u0794\x9c\xf2+\x06;\xfeB\\\xbd\xf0\t\xe9I\xc8\u0325=p\x83q\x88\r\u0db3\xa7d\x00\x00\u0794\xa8\"A\xd5\xcf)i[\x8e\x9c\u0274E\xdb\x13\xbd\x19'\xe0\r\x88\r\u0db3\xa7d\x00\x00\u0794\xaaA\x83]\xea\xcbs\xd0\a\xf1\xcc\xf2I\xa8Td\xc0\xa6Je\x88\r\u0db3\xa7d\x00\x00\u0794\xaaP\b\xe9\xaa@\x19\x93\xa3*\b\xbc\xa4\xff\u0271\a\x1c\xd2\x12\x88\r\u0db3\xa7d\x00\x00\u0794\xaf\xeb\x1e\x97\x9c\xab33z&\xf1\xe7& \xba9\x91\xa2C,\x88\r\u0db3\xa7d\x00\x00\u0794\xb5AW;z\xfdKO\x9b\xa7z|\xdd\xf2f\a\x1a\xe672\x88\r\u0db3\xa7d\x00\x00\u0794\xbf\xf7\xa6!I\xa3\xc6\xe7k\xaa\x92\xf7\xb2\x05\xa9!O\x0f\xf6\xed\x88\r\u0db3\xa7d\x00\x00\u0794\u05aa\x83Z\xefFk#\n\xeczy$\x8f7\xa2Ph\xa9\u0488\r\u0db3\xa7d\x00\x00\u0794\xdal\xeb\xd9?;\xca\x10w\f7ii%[\x02\xf5\xffy\xaa\x88\r\u0db3\xa7d\x00\x00\u0794\xe4J3k\xce\xe1&$\xf0{$4\xe2\xee\xf5\xda\x02\u0269\xb5\x88\r\u0db3\xa7d\x00\x00\u0794\xe4\xea\xe9\xa6\xf0\n\x0fI\x1b\x11\u00df_\x1d2\x90\xe25\u04f1\x88\r\u0db3\xa7d\x00\x00"
-
-    geth 코드 - 초기 블록 생성 시 할당된 계좌 및 자산 정의:
-        go-ethereum\core\genesis_alloc.go, line: 24
-        const mainnetAllocData = "\xf9\x02l\u0794\x02\xbd`\xaf\x9fDP\xde\xd4\xebY\v\x84\xb5\xbb\xaf%\xd3k\xf8\x88\r\u0db3\xa7d\x00\x00\u0794\x12d\x96\x04\xe9\xee\xb9n\x9b\x1dvaw2\x9fK\xda\\\xb0\u0208\r\u0db3\xa7d\x00\x00\u0794\x18\x82\xec\x96*\x17 e$)\xe2lW\x87\x1a\xe8\xbec\xf1u\x88\r\u0db3\xa7d\x00\x00\u0794\x1c\u00eep\xd0H_\x06<\xa4\xde\fU\x12\x826rWd'\x88\r\u0db3\xa7d\x00\x00\u0794G\x89u\x98\xf6<\x98\xba\x19{\x89\x83\x8aMa0\xa5~\xb4\n\x88\r\u0db3\xa7d\x00\x00\u0794UhQ4@\x9b\x82>\x0e\xe7g\xf2\x1b\u0514\xbf\xe9\x8e\x03\u0408\r\u0db3\xa7d\x00\x00\u0794\\\xae\x8f\xc1\x05\xb9e\x15\x9d\\lX\xee\xc35N2\xbf\x94\xa3\x88\r\u0db3\xa7d\x00\x00\u0794^Y/j\x98J91\x1e\xa3\x9b\x88\x1d\u049dj\xaf\x05Oz\x88\r\u0db3\xa7d\x00\x00\u0794g;D[\x80\xa7\x0f\x97\x1e\x13\x06\xfdn\xfd\xb88\x03\xc9+\u0548\r\u0db3\xa7d\x00\x00\u0794\x9c\xf2+\x06;\xfeB\\\xbd\xf0\t\xe9I\xc8\u0325=p\x83q\x88\r\u0db3\xa7d\x00\x00\u0794\xa8\"A\xd5\xcf)i[\x8e\x9c\u0274E\xdb\x13\xbd\x19'\xe0\r\x88\r\u0db3\xa7d\x00\x00\u0794\xaaA\x83]\xea\xcbs\xd0\a\xf1\xcc\xf2I\xa8Td\xc0\xa6Je\x88\r\u0db3\xa7d\x00\x00\u0794\xaaP\b\xe9\xaa@\x19\x93\xa3*\b\xbc\xa4\xff\u0271\a\x1c\xd2\x12\x88\r\u0db3\xa7d\x00\x00\u0794\xaf\xeb\x1e\x97\x9c\xab33z&\xf1\xe7& \xba9\x91\xa2C,\x88\r\u0db3\xa7d\x00\x00\u0794\xb5AW;z\xfdKO\x9b\xa7z|\xdd\xf2f\a\x1a\xe672\x88\r\u0db3\xa7d\x00\x00\u0794\xbf\xf7\xa6!I\xa3\xc6\xe7k\xaa\x92\xf7\xb2\x05\xa9!O\x0f\xf6\xed\x88\r\u0db3\xa7d\x00\x00\u0794\u05aa\x83Z\xefFk#\n\xeczy$\x8f7\xa2Ph\xa9\u0488\r\u0db3\xa7d\x00\x00\u0794\xdal\xeb\xd9?;\xca\x10w\f7ii%[\x02\xf5\xffy\xaa\x88\r\u0db3\xa7d\x00\x00\u0794\xe4J3k\xce\xe1&$\xf0{$4\xe2\xee\xf5\xda\x02\u0269\xb5\x88\r\u0db3\xa7d\x00\x00\u0794\xe4\xea\xe9\xa6\xf0\n\x0fI\x1b\x11\u00df_\x1d2\x90\xe25\u04f1\x88\r\u0db3\xa7d\x00\x00"
+    geth 코드 - 초기 블록 생성 go-ethereum\core\genesis_alloc.go, line: 24
+        const mainnetAllocData = "\xf9\x02\xa8\xe1\x94\x02\xbd`\xaf\x9fDP\xde\xd4\xebY\v\x84\xb5\xbb\xaf%\xd3k\xf8\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\x12d\x96\x04\xe9\xee\xb9n\x9b\x1dvaw2\x9fK\xda\\\xb0\u020b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\x18\x82\xec\x96*\x17 e$)\xe2lW\x87\x1a\xe8\xbec\xf1u\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\x1c\u00eep\xd0H_\x06<\xa4\xde\fU\x12\x826rWd'\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94G\x89u\x98\xf6<\x98\xba\x19{\x89\x83\x8aMa0\xa5~\xb4\n\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94UhQ4@\x9b\x82>\x0e\xe7g\xf2\x1b\u0514\xbf\xe9\x8e\x03\u040b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\\\xae\x8f\xc1\x05\xb9e\x15\x9d\\lX\xee\xc35N2\xbf\x94\xa3\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94^Y/j\x98J91\x1e\xa3\x9b\x88\x1d\u049dj\xaf\x05Oz\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94g;D[\x80\xa7\x0f\x97\x1e\x13\x06\xfdn\xfd\xb88\x03\xc9+\u054b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u151c\xf2+\x06;\xfeB\\\xbd\xf0\t\xe9I\xc8\u0325=p\x83q\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u1528\"A\xd5\xcf)i[\x8e\x9c\u0274E\xdb\x13\xbd\x19'\xe0\r\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u152aA\x83]\xea\xcbs\xd0\a\xf1\xcc\xf2I\xa8Td\xc0\xa6Je\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u152aP\b\xe9\xaa@\x19\x93\xa3*\b\xbc\xa4\xff\u0271\a\x1c\xd2\x12\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u152f\xeb\x1e\x97\x9c\xab33z&\xf1\xe7& \xba9\x91\xa2C,\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u1535AW;z\xfdKO\x9b\xa7z|\xdd\xf2f\a\x1a\xe672\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\u153f\xf7\xa6!I\xa3\xc6\xe7k\xaa\x92\xf7\xb2\x05\xa9!O\x0f\xf6\xed\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\u05aa\x83Z\xefFk#\n\xeczy$\x8f7\xa2Ph\xa9\u048b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\xdal\xeb\xd9?;\xca\x10w\f7ii%[\x02\xf5\xffy\xaa\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\xe4J3k\xce\xe1&$\xf0{$4\xe2\xee\xf5\xda\x02\u0269\xb5\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00\xe1\x94\xe4\xea\xe9\xa6\xf0\n\x0fI\x1b\x11\u00df_\x1d2\x90\xe25\u04f1\x8b\bE\x95\x16\x14\x01HJ\x00\x00\x00"
 
 역대 이더리움 하드포크 살펴보기:
     https://ethereum.org/en/history/
@@ -216,12 +214,13 @@ geth 프로젝트 구조 확인:
     geth 코드 - 블록체인 네트워크(메인넷) 구성 설정:
         go-ethereum\params\config.go, line: 102
         MainnetChainConfig = &ChainConfig{
-            SimpleBlock:                   big.NewInt(0),
+            SimpleBlock:                   big.NewInt(100),
         }
 
     geth 코드 - Ethash 프로토콜 변경 사항:
         go-ethereum\params\config.go, line: 297
-        AllEthashProtocolChanges = &ChainConfig{big.NewInt(1337), big.NewInt(0), nil, false, big.NewInt(0), common.Hash{}, big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), nil, nil, nil, nil, false, new(EthashConfig), nil}
+        AllEthashProtocolChanges = &ChainConfig{big.NewInt(1337), big.NewInt(0), nil, false, big.NewInt(0), common.Hash{}, big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), b 시 할당된 계좌 및 자산 정의:
+       ig.NewInt(0), big.NewInt(0), big.NewInt(0), big.NewInt(0), nil, nil, nil, nil, false, new(EthashConfig), nil}
     
     geth 코드 - Clique 프로토콜 변경 사항:
         go-ethereum\params\config.go, line: 304
@@ -267,4 +266,27 @@ geth 프로젝트 구조 확인:
             }
         }
 
-    
+체인 하드포크 (2) 블록 리워드 코드 추가:
+    geth 코드 - 여러 가지 상수와 난이도 조정 알고리즘:
+        go-ethereum\consensus\ethash\consensus.go, line: 45
+        var (
+            SimpleBlockReward             = big.NewInt(2e+18)
+        )
+
+    geth 코드 - 채굴 보상(리워드) 계산:
+        go-ethereum\consensus\ethash\consensus.go, line: 662
+        func accumulateRewards(config *params.ChainConfig, state *state.StateDB, header *types.Header, uncles []*types.Header) {
+            if config.IsSimple(header.Number) {
+                blockReward = SimpleBlockReward
+            }
+        }
+	
+    geth 코드 - 블록체인 또는 스마트 컨트랙트 관련 설정값들을 기본값으로 초기화하는 함수
+        go-ethereum\core\vm\runtime\runtime.go, line: 71
+        func setDefaults(cfg *Config) {
+            if cfg.ChainConfig == nil {
+                cfg.ChainConfig = &params.ChainConfig{
+                    SimpleBlock:         new(big.Int),
+                }
+            }
+        }
