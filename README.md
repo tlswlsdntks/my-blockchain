@@ -312,3 +312,26 @@ geth 프로젝트 구조 확인:
                 x := (time - parent.Time) / 5
             }   
         }
+
+체인 하드포크 (4) 난이도와 난이도 폭탄 코드 추가:
+    geth 코드 - EIP 5133: 
+        총 1,140만 블록에 걸쳐 명시된 난이도 조정 알고리즘으로 '폭탄'을 조정하는 역할
+        go-ethereum\consensus\ethash\consensus.go, line: 55
+        var (
+            calcDifficultyEip5133 = makeDifficultyCalculator(big.NewInt(11_400_000))
+        )
+
+    geth 코드 - 난이도 조정 알고리즘 추가:
+        go-ethereum\consensus\ethash\consensus.go, line: 50
+        var (
+            calcDifficultySimple = makeDifficultyCalculator(big.NewInt(15_000_000))
+        )
+
+        go-ethereum\consensus\ethash\consensus.go, line: 346
+        func CalcDifficulty(config *params.ChainConfig, time uint64, parent *types.Header) *big.Int {
+            next := new(big.Int).Add(parent.Number, big1)
+            switch {
+            case config.IsSimple(next):
+                return calcDifficultySimple(time, parent)
+            }
+        }
