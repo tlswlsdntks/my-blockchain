@@ -21,6 +21,9 @@ geth 프로젝트 구조 확인:
 다른 체인 살펴보기 (1) 이더리움 클래식:
     개요:
         2016년 이더리움 플랫폼에서 발생한 'DAO 해킹 사건'
+            DAO(Decentralized Autonomous Organization): 
+                이더리움 블록체인 위에서 운영되는 분산형 자율조직으로, 투자자들이 자금을 모아 다양한 프로젝트에 투자하는 목적으로 설계되었다.
+                2016년, 이더리움 커뮤니티는 'The DAO'라는 이름의 대규모 투자 펀드를 만들었으며, 이는 당시 최대 규모의 스마트 계약 프로젝트 중 하나였습니다.
 
     core-geth 프로젝트 구조 확인:
         프로젝트 가져오기:
@@ -81,65 +84,70 @@ geth 프로젝트 구조 확인:
     Keccak-256 해시 함수 사용:
         https://emn178.github.io/online-tools/keccak_256.html, input: simple
 
-    geth 코드 - DefaultGenesisBlock 함수 수정:
-        go-ethereum\core\genesis.go, line: 446
-        func DefaultGenesisBlock() *Genesis {
-            return &Genesis{
-                Config: params.MainnetChainConfig,
-                Nonce:  66,
-                ExtraData:  hexutil.MustDecode("3a784687a2b2ff9a2c72e22b001d33d9f2e2155a7858ff663b0990d35f14745d"),
-                GasLimit:   8000000,
-                Difficulty: big.NewInt(17179),
-                Alloc:      decodePrealloc(mainnetAllocData),
+    제네시스 블록 설정:
+        geth 코드 - DefaultGenesisBlock 함수 수정:
+            go-ethereum\core\genesis.go, line: 446
+            func DefaultGenesisBlock() *Genesis {
+                return &Genesis{
+                    Config: params.MainnetChainConfig,
+                    Nonce:  66,
+                    ExtraData:  hexutil.MustDecode("3a784687a2b2ff9a2c72e22b001d33d9f2e2155a7858ff663b0990d35f14745d"),
+                    GasLimit:   8000000,
+                    Difficulty: big.NewInt(17179),
+                    Alloc:      decodePrealloc(mainnetAllocData),
+                }
             }
-        }
 
-    geth 코드 - MainnetChainConfig 변수 수정:
-        go-ethereum\params\config.go, line: 60
-        MainnetChainConfig = &ChainConfig{
-            ChainID:                       big.NewInt(213912), // simple
-            HomesteadBlock:                big.NewInt(0),
-            DAOForkBlock:                  big.NewInt(0),
-            DAOForkSupport:                true,
-            EIP150Block:                   big.NewInt(0),
-            EIP150Hash:                    common.Hash{},
-            EIP155Block:                   big.NewInt(0),
-            EIP158Block:                   big.NewInt(0),
-            ByzantiumBlock:                big.NewInt(0),
-            ConstantinopleBlock:           big.NewInt(0),
-            PetersburgBlock:               big.NewInt(0),
-            IstanbulBlock:                 big.NewInt(0),
-            MuirGlacierBlock:              big.NewInt(0),
-            BerlinBlock:                   big.NewInt(0),
-            LondonBlock:                   big.NewInt(0),
-            ArrowGlacierBlock:             big.NewInt(0),
-            GrayGlacierBlock:              big.NewInt(0),
-            TerminalTotalDifficulty:       nil,
-            TerminalTotalDifficultyPassed: false,
-            Ethash:                        new(EthashConfig),
-        }
+    메인넷 체인 구성:
+        geth 코드 - MainnetChainConfig 변수 수정:
+            go-ethereum\params\config.go, line: 60
+            MainnetChainConfig = &ChainConfig {
+                ChainID:                       big.NewInt(213912), // simple
+                HomesteadBlock:                big.NewInt(0),
+                DAOForkBlock:                  big.NewInt(0),
+                DAOForkSupport:                true,
+                EIP150Block:                   big.NewInt(0),
+                EIP150Hash:                    common.Hash{},
+                EIP155Block:                   big.NewInt(0),
+                EIP158Block:                   big.NewInt(0),
+                ByzantiumBlock:                big.NewInt(0),
+                ConstantinopleBlock:           big.NewInt(0),
+                PetersburgBlock:               big.NewInt(0),
+                IstanbulBlock:                 big.NewInt(0),
+                MuirGlacierBlock:              big.NewInt(0),
+                BerlinBlock:                   big.NewInt(0),
+                LondonBlock:                   big.NewInt(0),
+                ArrowGlacierBlock:             big.NewInt(0),
+                GrayGlacierBlock:              big.NewInt(0),
+                TerminalTotalDifficulty:       nil,
+                TerminalTotalDifficultyPassed: false,
+                Ethash:                        new(EthashConfig),
+            }
 
-    geth 코드 - MainnetChainConfig & MainnetCheckpointOracle 변수 주석 처리:
-        go-ethereum\params\config.go, line: 108, 116
-        MainnetTrustedCheckpoint = &TrustedCheckpoint{
-            // SectionIndex: 451,
-            // SectionHead:  common.HexToHash("0xe47f84b9967eb2ad2afff74d59901b63134660011822fdababaf8fdd18a75aa6"),
-            // CHTRoot:      common.HexToHash("0xc31e0462ca3d39a46111bb6b63ac4e1cac84089472b7474a319d582f72b3f0c0"),
-            // BloomRoot:    common.HexToHash("0x7c9f25ce3577a3ab330d52a7343f801899cf9d4980c69f81de31ccc1a055c809"),
-        }
+    신뢰할 수 있는 체크포인트:
+        geth 코드 - MainnetTrustedCheckpoint 변수 주석 처리:
+            go-ethereum\params\config.go, line: 108, 116
+            MainnetTrustedCheckpoint = &TrustedCheckpoint{
+                // SectionIndex: 451,
+                // SectionHead:  common.HexToHash("0xe47f84b9967eb2ad2afff74d59901b63134660011822fdababaf8fdd18a75aa6"),
+                // CHTRoot:      common.HexToHash("0xc31e0462ca3d39a46111bb6b63ac4e1cac84089472b7474a319d582f72b3f0c0"),
+                // BloomRoot:    common.HexToHash("0x7c9f25ce3577a3ab330d52a7343f801899cf9d4980c69f81de31ccc1a055c809"),
+            }
 
-        // MainnetCheckpointOracle contains a set of configs for the main network oracle.
-        MainnetCheckpointOracle = &CheckpointOracleConfig{
-            // Address: common.HexToAddress("0x9a9070028361F7AAbeB3f2F2Dc07F82C4a98A02a"),
-            // Signers: []common.Address{
-            // 	common.HexToAddress("0x1b2C260efc720BE89101890E4Db589b44E950527"), // Peter
-            // 	common.HexToAddress("0x78d1aD571A1A09D60D9BBf25894b44e4C8859595"), // Martin
-            // 	common.HexToAddress("0x286834935f4A8Cfb4FF4C77D5770C2775aE2b0E7"), // Zsolt
-            // 	common.HexToAddress("0xb86e2B0Ab5A4B1373e40c51A7C712c70Ba2f9f8E"), // Gary
-            // 	common.HexToAddress("0x0DF8fa387C602AE62559cC4aFa4972A7045d6707"), // Guillaume
-            // },
-            // Threshold: 2,
-        }
+    특정 체크포인트(중요한 블록 또는 상태)를 검증하고 제공:
+        geth 코드 - MainnetCheckpointOracle 변수 주석 처리:
+            // MainnetCheckpointOracle contains a set of configs for the main network oracle.
+            MainnetCheckpointOracle = &CheckpointOracleConfig{
+                // Address: common.HexToAddress("0x9a9070028361F7AAbeB3f2F2Dc07F82C4a98A02a"),
+                // Signers: []common.Address{
+                // 	common.HexToAddress("0x1b2C260efc720BE89101890E4Db589b44E950527"), // Peter
+                // 	common.HexToAddress("0x78d1aD571A1A09D60D9BBf25894b44e4C8859595"), // Martin
+                // 	common.HexToAddress("0x286834935f4A8Cfb4FF4C77D5770C2775aE2b0E7"), // Zsolt
+                // 	common.HexToAddress("0xb86e2B0Ab5A4B1373e40c51A7C712c70Ba2f9f8E"), // Gary
+                // 	common.HexToAddress("0x0DF8fa387C602AE62559cC4aFa4972A7045d6707"), // Guillaume
+                // },
+                // Threshold: 2,
+            }
 
 제네시스 블록 코드 수정 (3) bip32 wallet 생성 실습:
     BIP 32 (Bitcoin Improvement Proposal 32):
@@ -200,3 +208,6 @@ geth 프로젝트 구조 확인:
     geth 코드 - 초기 블록 생성 시 할당된 계좌 및 자산 정의:
         go-ethereum\core\genesis_alloc.go, line: 24
         const mainnetAllocData = "\xf9\x02l\u0794\x02\xbd`\xaf\x9fDP\xde\xd4\xebY\v\x84\xb5\xbb\xaf%\xd3k\xf8\x88\r\u0db3\xa7d\x00\x00\u0794\x12d\x96\x04\xe9\xee\xb9n\x9b\x1dvaw2\x9fK\xda\\\xb0\u0208\r\u0db3\xa7d\x00\x00\u0794\x18\x82\xec\x96*\x17 e$)\xe2lW\x87\x1a\xe8\xbec\xf1u\x88\r\u0db3\xa7d\x00\x00\u0794\x1c\u00eep\xd0H_\x06<\xa4\xde\fU\x12\x826rWd'\x88\r\u0db3\xa7d\x00\x00\u0794G\x89u\x98\xf6<\x98\xba\x19{\x89\x83\x8aMa0\xa5~\xb4\n\x88\r\u0db3\xa7d\x00\x00\u0794UhQ4@\x9b\x82>\x0e\xe7g\xf2\x1b\u0514\xbf\xe9\x8e\x03\u0408\r\u0db3\xa7d\x00\x00\u0794\\\xae\x8f\xc1\x05\xb9e\x15\x9d\\lX\xee\xc35N2\xbf\x94\xa3\x88\r\u0db3\xa7d\x00\x00\u0794^Y/j\x98J91\x1e\xa3\x9b\x88\x1d\u049dj\xaf\x05Oz\x88\r\u0db3\xa7d\x00\x00\u0794g;D[\x80\xa7\x0f\x97\x1e\x13\x06\xfdn\xfd\xb88\x03\xc9+\u0548\r\u0db3\xa7d\x00\x00\u0794\x9c\xf2+\x06;\xfeB\\\xbd\xf0\t\xe9I\xc8\u0325=p\x83q\x88\r\u0db3\xa7d\x00\x00\u0794\xa8\"A\xd5\xcf)i[\x8e\x9c\u0274E\xdb\x13\xbd\x19'\xe0\r\x88\r\u0db3\xa7d\x00\x00\u0794\xaaA\x83]\xea\xcbs\xd0\a\xf1\xcc\xf2I\xa8Td\xc0\xa6Je\x88\r\u0db3\xa7d\x00\x00\u0794\xaaP\b\xe9\xaa@\x19\x93\xa3*\b\xbc\xa4\xff\u0271\a\x1c\xd2\x12\x88\r\u0db3\xa7d\x00\x00\u0794\xaf\xeb\x1e\x97\x9c\xab33z&\xf1\xe7& \xba9\x91\xa2C,\x88\r\u0db3\xa7d\x00\x00\u0794\xb5AW;z\xfdKO\x9b\xa7z|\xdd\xf2f\a\x1a\xe672\x88\r\u0db3\xa7d\x00\x00\u0794\xbf\xf7\xa6!I\xa3\xc6\xe7k\xaa\x92\xf7\xb2\x05\xa9!O\x0f\xf6\xed\x88\r\u0db3\xa7d\x00\x00\u0794\u05aa\x83Z\xefFk#\n\xeczy$\x8f7\xa2Ph\xa9\u0488\r\u0db3\xa7d\x00\x00\u0794\xdal\xeb\xd9?;\xca\x10w\f7ii%[\x02\xf5\xffy\xaa\x88\r\u0db3\xa7d\x00\x00\u0794\xe4J3k\xce\xe1&$\xf0{$4\xe2\xee\xf5\xda\x02\u0269\xb5\x88\r\u0db3\xa7d\x00\x00\u0794\xe4\xea\xe9\xa6\xf0\n\x0fI\x1b\x11\u00df_\x1d2\x90\xe25\u04f1\x88\r\u0db3\xa7d\x00\x00"
+
+역대 이더리움 하드포크 살펴보기:
+    https://ethereum.org/en/history/
