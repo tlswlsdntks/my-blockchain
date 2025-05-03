@@ -64,3 +64,12 @@ geth 프로젝트 구조 확인:
         Polygon 생태계 내에서 맞춤형 블록체인 네트워크를 빠르게 만들고 관리하는 도구
         Polygon Edge 프로젝트 가져오기:
             git clone "https://github.com/0xPolygon/polygon-edge.git"
+
+다른 체인 살펴보기 (4) 위믹스:
+    개요:
+        https://docs.wemix.com/ko#wemix3.0-overview
+
+    WEMIX 프로젝트 구조 확인:
+        go-wemix 프로젝트 가져오기:
+            git clone "https://github.com/wemixarchive/go-wemix.git"
+    
