@@ -510,3 +510,64 @@ geth 프로젝트 구조 확인:
         var (
             MyBlockReward, _              = big.NewInt(0).SetString("50000000000000000000", 10)
         )
+
+블록 탐색기 연동 및 github pages 에 배포:
+    이더리움 스택용 오픈 소스 블록 탐색기 (Expedition):
+        https://github.com/tlswlsdntks/expedition
+
+    의존성 문제 해결:
+        $ rm -rf node_modules package-lock.json
+            node_modules: 
+                프로젝트에 설치된 모든 의존성 패키지들이 저장된 폴더
+            package-lock.json:
+                의존성 버전과 구조를 고정하여 일관성을 유지하는 파일
+        
+    npm 의 캐시 정리:
+        $ npm cache clean --force
+            npm 캐시:
+                패키지 다운로드 속도를 높이기 위해 저장하는 임시 데이터
+
+    package.json 에 명시된 의존성 패키지들을 다시 설치:
+        $ npm i
+        
+    주의사항:
+        react-scripts 패키지 버전 이슈로 인하여 Node.js 버전 14.21.3 (64비트 버전) 으로 낮춰야 한다.
+
+    react-scripts 패키지를 개발 의존성(devDependencies) 으로 설치:
+        $ npm i --save-dev react-scripts
+            react-scripts:
+                React 프로젝트를 빌드, 개발 서버 실행, 테스트 등을 가능하게 하는 스크립트 모음
+
+
+    GitHub Pages 패키지를 개발 의존성(devDependencies) 으로 설치:
+        $ npm i --save-dev gh-pages
+            gh-pages:    
+                GitHub Pages 에 정적 사이트를 배포하는 데 도움을 주는 도구
+
+    프로젝트의 개발 서버 시작:
+        package.json 의 scripts 섹션에 정의된 start 명령어를 실행하며, React 앱의 경우 로컬 개발 서버를 띄우는 역할
+        $ npm start
+
+    배포:
+        package.json 의 scripts 섹션에 정의된 deploy 명령어를 실행
+        $ npm run deploy
+            참고: 
+                이 명령어를 통해 빌드된 프로젝트를 GitHub Pages 또는 다른 호스팅 서비스에 배포
+                https://velog.io/@938938/gh-pages-%EC%82%AC%EC%9A%A9
+
+    expedition 코드 - 체인 목록 컴포넌트 수정:
+        src\hooks\useChainList.ts line: 13
+        export default function() {
+            const [chains, setChains] = React.useState<Chain[]>([
+                {
+                name: "Test", // 체인의 이름
+                network: "mainnet", // 체인이 연결된 네트워크 유형
+                rpc: ["https://127.0.0.1:8545"], // 원격 프록시 서버(RPC) 주소
+                },
+            ]); 
+        }
+
+    expedition 코드 - 기본 URL 수정:
+        ${process.env.PUBLIC_URL}/tx
+        ${process.env.PUBLIC_URL}/address
+        ${process.env.PUBLIC_URL}/block
