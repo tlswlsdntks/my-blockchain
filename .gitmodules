@@ -1,6 +1,6 @@
 [submodule "ethereum-hdwallet"]
 	path = ethereum-hdwallet
 	url = git@github.com:tlswlsdntks/ethereum-hdwallet.git
-[submodule "my-go-ethereum"]
-	path = my-go-ethereum
-	url = https://github.com/tlswlsdntks/my-go-ethereum.git
+[submodule "go-ethereum"]
+	path = go-ethereum
+	url = https://github.com/tlswlsdntks/go-ethereum.git

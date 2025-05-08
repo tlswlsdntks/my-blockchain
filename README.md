@@ -482,3 +482,31 @@ geth 프로젝트 구조 확인:
             var MainnetBootnodes = []string{
                 "enode://092ec8c143cbb4380d31f4b51449ea02167427312106dc54252d160461cde8db8ddcf86c591b53735aa9d6842d3f02839dad232c7a87f2afcd811c59b3360337@34.47.114.59:30303"
             }
+
+배포된 네트워크에서 하드포크 확인:
+    새 계정을 생성:
+        > personal.newAccount("0000")
+
+    채굴 실행:
+        > miner.start(1)
+
+    현재 블록 번호 조회:
+        > eth.blockNumber()
+
+    서버 또는 노드의 정보를 조회:
+        > admin.nodeInfo
+
+    가상 머신에 피어 노드를 추가:
+        > admin.addPeer("enode://092ec8c143cbb4380d31f4b51449ea02167427312106dc54252d160461cde8db8ddcf86c591b53735aa9d6842d3f02839dad232c7a87f2afcd811c59b3360337@34.47.114.59:30303")
+
+    현재 블록 번호 조회:
+        > eth.blockNumber()
+
+    현재 계정의 잔액 조회:
+        > eth.getBalance(eth.coinbase)
+
+    geth 코드 - 여러 가지 상수와 난이도 조정 알고리즘:
+        go-ethereum\consensus\ethash\consensus.go, line: 45
+        var (
+            MyBlockReward, _              = big.NewInt(0).SetString("50000000000000000000", 10)
+        )
