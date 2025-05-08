@@ -99,7 +99,7 @@ geth 프로젝트 구조 확인:
                     return &Genesis{
                         Config: params.MainnetChainConfig,
                         Nonce:  66,
-                        ExtraData:  hexutil.MustDecode("0x24f272b2fae5cfb07bf2bb152eff5b06db2b26d20991b43c6272d4ae6d8c18ec"),
+                        ExtraData:  hexutil.MustDecode("0x24f272b2fae5cfb07bf2bb152eff5b06db2b26d20991b43c6272d4ae6d8c18ec"), // myBlock
                         GasLimit:   8_000_000,
                         Difficulty: big.NewInt(17179),
                         Alloc:      decodePrealloc(mainnetAllocData),
@@ -134,27 +134,16 @@ geth 프로젝트 구조 확인:
 
         신뢰할 수 있는 체크포인트:
             geth 코드 - MainnetTrustedCheckpoint 변수 주석 처리:
-                go-ethereum\params\config.go, line: 108, 116
+                go-ethereum\params\config.go, line: 85
                 MainnetTrustedCheckpoint = &TrustedCheckpoint{
-                    // SectionIndex: 451,
-                    // SectionHead:  common.HexToHash("0xe47f84b9967eb2ad2afff74d59901b63134660011822fdababaf8fdd18a75aa6"),
-                    // CHTRoot:      common.HexToHash("0xc31e0462ca3d39a46111bb6b63ac4e1cac84089472b7474a319d582f72b3f0c0"),
-                    // BloomRoot:    common.HexToHash("0x7c9f25ce3577a3ab330d52a7343f801899cf9d4980c69f81de31ccc1a055c809"),
+                    
                 }
 
         특정 체크포인트(중요한 블록 또는 상태)를 검증하고 제공:
             geth 코드 - MainnetCheckpointOracle 변수 주석 처리:
-                // MainnetCheckpointOracle contains a set of configs for the main network oracle.
+                go-ethereum\params\config.go, line: 93
                 MainnetCheckpointOracle = &CheckpointOracleConfig{
-                    // Address: common.HexToAddress("0x9a9070028361F7AAbeB3f2F2Dc07F82C4a98A02a"),
-                    // Signers: []common.Address{
-                    // 	common.HexToAddress("0x1b2C260efc720BE89101890E4Db589b44E950527"), // Peter
-                    // 	common.HexToAddress("0x78d1aD571A1A09D60D9BBf25894b44e4C8859595"), // Martin
-                    // 	common.HexToAddress("0x286834935f4A8Cfb4FF4C77D5770C2775aE2b0E7"), // Zsolt
-                    // 	common.HexToAddress("0xb86e2B0Ab5A4B1373e40c51A7C712c70Ba2f9f8E"), // Gary
-                    // 	common.HexToAddress("0x0DF8fa387C602AE62559cC4aFa4972A7045d6707"), // Guillaume
-                    // },
-                    // Threshold: 2,
+                    
                 }
 
     (3) bip32 wallet 생성 실습:
@@ -266,6 +255,14 @@ geth 프로젝트 구조 확인:
             func (c *ChainConfig) CheckConfigForkOrder() error {
                 for _, cur := range []fork{
                     {name: "myBlock", block: c.MyBlock},
+                }
+            }
+
+        geth 코드 - 블록체인 네트워크의 체인 구성 검증 함수:
+            go-ethereum\params\config.go, line: 718
+            func (c *ChainConfig) checkCompatible(newcfg *ChainConfig, head *big.Int) *ConfigCompatError {
+                if isForkIncompatible(c.MyBlock, newcfg.MyBlock, head) {
+                    return newCompatError("My block", c.MyBlock, newcfg.MyBlock)
                 }
             }
 
@@ -391,3 +388,97 @@ geth 프로젝트 구조 확인:
     Fatal: Failed to register the Ethereum service: rlp: input list has too many elements for rawdb.freezerTableMeta 처리:
         C:\Users\tlswl\AppData\Local\Ethereum\geth\chaindata 폴더 삭제
 
+블록체인 클라이언트 gcp 서버에 배포:
+    가상 머신 인스턴스 생성:
+        GCP(Google Cloud Platform):
+            https://console.cloud.google.com/compute/instances?onCreate=true&hl=ko&inv=1&invt=Abwztg&project=dulcet-bonito-459112-g8
+
+    패키지 목록 업데이트:
+    $ sudo apt update
+
+    Git:
+        설치:
+            $ sudo apt install git
+
+        원격 저장소 가져오기:
+            $ git clone "https://github.com/tlswlsdntks/my-go-ethereum.git"
+
+    Go:
+        설치:
+            https://go.dev/dl/
+            $ wget https://go.dev/dl/go1.19.4.linux-amd64.tar.gz
+
+        압축 해제:
+            https://go.dev/doc/install
+            $ sudo tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz
+
+        환경 변수 설정:
+            $ export PATH=$PATH:/usr/local/go/bin
+
+    GCC(Ubuntu/Debian 계열):
+        설치:
+            $ sudo apt install build-essential
+
+    빌드:
+        $ go run build/ci.go install
+
+    Geth 실행:
+        $ ./build/bin/geth --http --http.api "web3, eth, txpool, personal, ethash, net, debug, personal" --http.addr "0.0.0.0" --http.corsdomain "*" console 
+
+    서버 또는 노드의 정보를 조회:
+        > admin.nodeInfo
+
+    피어 노드를 추가:
+        > admin.addPeer("enode://092ec8c143cbb4380d31f4b51449ea02167427312106dc54252d160461cde8db8ddcf86c591b53735aa9d6842d3f02839dad232c7a87f2afcd811c59b3360337@34.47.114.59:30303")
+
+    네트워크의 피어(peer) 목록:
+        > admin.peers
+        {
+            enode: "enode://d5c4c02c4d82ea1e4950513247f2d2888ce2b97e0eceda7265c491ad5c4853c08b2783d1b7b27fac6d2f3b89300c41a205aef02b14a2d404459e3e47f5387f3a@34.64.153.157:30303",
+            enr: "enr:-KO4QGFIPtVJg07OiPyPwkneXU3MU-ErHNwBDJbsvmwkjos7LB6EMYNjmT218EHIsMuEFMPyScwrYB-l7vvviXpvgI-GAZaq_vncg2V0aMfGhABzofxkgmlkgnY0gmlwhCJAmZ2Jc2VjcDI1NmsxoQLVxMAsTYLqHklQUTJH8tKIjOK5fg7O2nJlxJGtXEhTwIRzbmFwwIN0Y3CCdl-DdWRwgnZf",
+            id: "ffd0ddfc43531664503eca2d2a107a36e4516eee731ce3403118c39f48974d6b",
+            ip: "34.64.153.157",
+            listenAddr: "[::]:30303",
+            name: "Geth/v1.10.26-stable-14e3f556/linux-amd64/go1.19.4",
+            ports: {
+                discovery: 30303,
+                listener: 30303
+            },
+            protocols: {
+                eth: {
+                config: {
+                    arrowGlacierBlock: 0,
+                    berlinBlock: 0,
+                    byzantiumBlock: 0,
+                    chainId: 376104,
+                    constantinopleBlock: 0,
+                    daoForkBlock: 0,
+                    daoForkSupport: true,
+                    eip150Block: 0,
+                    eip150Hash: "0x0000000000000000000000000000000000000000000000000000000000000000",
+                    eip155Block: 0,
+                    eip158Block: 0,
+                    ethash: {},
+                    grayGlacierBlock: 0,
+                    homesteadBlock: 0,
+                    istanbulBlock: 0,
+                    londonBlock: 0,
+                    muirGlacierBlock: 0,
+                    myBlock: 100,
+                    petersburgBlock: 0
+                },
+                difficulty: 17179,
+                genesis: "0xff88b22397d79d0f002366657ade4e7626ec0a7328bf96cb02d80a895bb7f8d5",
+                head: "0xff88b22397d79d0f002366657ade4e7626ec0a7328bf96cb02d80a895bb7f8d5",
+                network: 1
+                },
+                snap: {}
+            }
+        }
+
+    이더리움 메인넷의 부트노드 목록:
+        geth 코드 - 난이도 조정 알고리즘 추가:
+            go-ethereum\params\bootnodes.go, line: 23
+            var MainnetBootnodes = []string{
+                "enode://092ec8c143cbb4380d31f4b51449ea02167427312106dc54252d160461cde8db8ddcf86c591b53735aa9d6842d3f02839dad232c7a87f2afcd811c59b3360337@34.47.114.59:30303"
+            }
